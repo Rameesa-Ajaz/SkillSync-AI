@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillSync AI — Premium Resume Analyzer</title>
+  
+  <!-- SEO & Description -->
+  <meta name="description" content="AI-powered ATS Resume Analyzer, Skill Gap visualizer, course recommender and career path predictor.">
+  
+  <!-- Modern Google Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Premium Custom Styling -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Animated Glowing Particles Backdrop -->
+  <div class="glow-overlay"></div>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-emoji">🎯</span>
+      <div class="brand-meta">
+        <h1 class="gradient-text">SkillSync AI</h1>
+        <p>AI Resume Analyzer</p>
+      </div>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-screen="dashboard" id="nav-dashboard">
+        <span class="nav-icon">🏠</span> Dashboard Overview
+      </button>
+      <button class="nav-item" data-screen="analyze" id="nav-analyze">
+        <span class="nav-icon">📄</span> Resume Analysis
+      </button>
+      <button class="nav-item disabled" data-screen="ats" id="nav-ats">
+        <span class="nav-icon">🎯</span> ATS Score Dashboard
+      </button>
+      <button class="nav-item disabled" data-screen="gap" id="nav-gap">
+        <span class="nav-icon">📊</span> Skill Gap Analysis
+      </button>
+      <button class="nav-item disabled" data-screen="recs" id="nav-recs">
+        <span class="nav-icon">📚</span> Course Recommendations
+      </button>
+      <button class="nav-item disabled" data-screen="career" id="nav-career">
+        <span class="nav-icon">🚀</span> Career Prediction
+      </button>
+      <button class="nav-item" data-screen="chat" id="nav-chat">
+        <span class="nav-icon">💬</span> AI Career Assistant
+      </button>
+    </nav>
+    
+    <div class="sidebar-footer">
+      <p>Version 2.0 (Premium Full-Stack)</p>
+    </div>
+  </aside>
+
+  <!-- Main Scrollable Viewport -->
+  <main class="main-content">
+    
+    <!-- Header Banner -->
+    <header class="main-header">
+      <div id="header-brand">🎯 SkillSync AI</div>
+      <div class="user-badge" id="session-badge">Session: Anon</div>
+    </header>
+
+    <!-- SCREEN 1: DASHBOARD OVERVIEW -->
+    <section id="screen-dashboard" class="screen-panel active">
+      <div class="page-header">
+        <h1>Welcome to SkillSync AI</h1>
+        <p>Your premium intelligent gateway to visual resume optimization, skill gap metrics, and AI career counseling.</p>
+      </div>
+      
+      <div class="glass-card glow-card hero-card">
+        <div class="hero-left">
+          <h2>Futuristic Career Acceleration</h2>
+          <p>SkillSync utilizes state-of-the-art NLP, semantic analysis (BERT), and machine learning classifiers to dissect your resume against market expectations, rank critical gaps, and map custom learning paths.</p>
+          <button class="btn btn-primary" onclick="showScreen('analyze')">Get Started Now →</button>
+        </div>
+        <div class="hero-right">
+          <div class="glow-sphere"></div>
+        </div>
+      </div>
+      
+      <div class="features-grid">
+        <div class="glass-card feat-item">
+          <div class="feat-icon">📄</div>
+          <h3>Deep Parsing</h3>
+          <p>Extract contact details, structured sections, and skills from PDF or DOCX instantly.</p>
+        </div>
+        <div class="glass-card feat-item">
+          <div class="feat-icon">🎯</div>
+          <h3>ATS Ensemble Score</h3>
+          <p>Hybrid rating calculated using BERT semantics, keyword matching, and direct skill overlap.</p>
+        </div>
+        <div class="glass-card feat-item">
+          <div class="feat-icon">📊</div>
+          <h3>Skill Gap Mapping</h3>
+          <p>Visualize priority-ranked skills, estimated learning paths, and coverage radar charts.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: RESUME ANALYSIS -->
+    <section id="screen-analyze" class="screen-panel">
+      <div class="page-header">
+        <h1>Resume Analysis</h1>
+        <p>Upload your resume and customize your target role to launch the AI analysis engine.</p>
+      </div>
+      
+      <div class="layout-grid-2">
+        <div class="glass-card">
+          <h2 class="section-title">📎 Upload Resume</h2>
+          <p class="section-subtitle">Supports PDF, DOCX, and DOC formats</p>
+          
+          <div class="upload-zone" id="drop-zone">
+            <span class="upload-icon">📁</span>
+            <p class="upload-prompt">Drag & drop your resume file here or click to browse</p>
+            <input type="file" id="resume-file" accept=".pdf,.docx,.doc" class="hidden-input">
+            <div id="file-status" class="file-status"></div>
+          </div>
+        </div>
+        
+        <div class="glass-card">
+          <h2 class="section-title">⚙️ Analysis Configuration</h2>
+          
+          <div class="form-group">
+            <label for="job-role-select">🎯 Target Job Role</label>
+            <select id="job-role-select" class="form-control">
+              <option value="" disabled selected>Loading available roles...</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="jd-text">📝 Job Description (Optional)</label>
+            <p class="input-hint">Highly recommended for precise ATS keyword and semantic matching.</p>
+            <textarea id="jd-text" class="form-control" rows="6" placeholder="Paste the full job description here..."></textarea>
+          </div>
+          
+          <div class="form-group toggle-group">
+            <label class="toggle-switch">
+              <input type="checkbox" id="bert-toggle" checked>
+              <span class="slider"></span>
+            </label>
+            <div class="toggle-meta">
+              <span class="toggle-label">Use BERT Semantic Matching</span>
+              <span class="toggle-desc">Slower, but highly accurate semantic analysis.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="action-row">
+        <button class="btn btn-primary btn-large" id="analyze-btn" onclick="startAnalysis()">🚀 Analyse Resume</button>
+      </div>
+
+      <!-- Pipeline Progress Visualizer (Hidden initially) -->
+      <div class="glass-card pipeline-card hidden" id="pipeline-card">
+        <h3>🔍 SkillSync Analysis Engine running</h3>
+        <div class="pipeline-loader">
+          <div class="pipeline-progress" id="pipeline-progress-bar"></div>
+        </div>
+        <div class="pipeline-stages">
+          <div class="stage" id="stage-parse"><span class="stage-bullet"></span> Parse Resume</div>
+          <div class="stage" id="stage-skills"><span class="stage-bullet"></span> Extract Skills</div>
+          <div class="stage" id="stage-ats"><span class="stage-bullet"></span> Compute ATS Score</div>
+          <div class="stage" id="stage-gap"><span class="stage-bullet"></span> Skill Gap Analysis</div>
+          <div class="stage" id="stage-recs"><span class="stage-bullet"></span> Fetch Recommendations</div>
+          <div class="stage" id="stage-career"><span class="stage-bullet"></span> Predict Career Paths</div>
+        </div>
+      </div>
+
+      <!-- Post-Analysis Summary Widgets (Hidden initially) -->
+      <div class="analysis-results-summary hidden" id="analysis-summary-section">
+        <h2 class="section-header-title">✨ Quick Summary</h2>
+        <div class="metrics-grid">
+          <div class="glass-card metric-card" style="border-left-color: #6C63FF;">
+            <p class="metric-label">ATS Score</p>
+            <p class="metric-value" id="summary-ats-val">0/100</p>
+          </div>
+          <div class="glass-card metric-card" style="border-left-color: #4ECDC4;">
+            <p class="metric-label">Skill Match</p>
+            <p class="metric-value" id="summary-match-val">0%</p>
+          </div>
+          <div class="glass-card metric-card" style="border-left-color: #00D4AA;">
+            <p class="metric-label">Skills Found</p>
+            <p class="metric-value" id="summary-skills-found">0</p>
+          </div>
+          <div class="glass-card metric-card" style="border-left-color: #FF6B6B;">
+            <p class="metric-label">Missing Skills</p>
+            <p class="metric-value" id="summary-skills-missing">0</p>
+          </div>
+        </div>
+        
+        <div class="glass-card contact-card" id="contact-info-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: ATS SCORE DASHBOARD -->
+    <section id="screen-ats" class="screen-panel">
+      <div class="page-header">
+        <h1>ATS Score Dashboard</h1>
+        <p>How well does your resume match the target job requirements?</p>
+      </div>
+      
+      <div class="layout-grid-2">
+        <div class="glass-card flex-center">
+          <h2 class="section-title text-center">Score Indicator</h2>
+          <!-- Custom SVG Radial Score Ring -->
+          <div class="svg-ring-container">
+            <svg width="220" height="220" viewBox="0 0 220 220" class="radial-ring">
+              <circle cx="110" cy="110" r="90" class="ring-bg"></circle>
+              <circle cx="110" cy="110" r="90" class="ring-fg" id="ats-ring-fg" stroke-dasharray="565" stroke-dashoffset="565"></circle>
+            </svg>
+            <div class="ring-text">
+              <span class="ring-score" id="ats-score-display">0</span>
+              <span class="ring-label" id="ats-grade-display">Grade —</span>
+            </div>
+          </div>
+          <div class="explanation-box" id="ats-explanation">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+        
+        <div class="glass-card">
+          <h2 class="section-title">Score Breakdown</h2>
+          
+          <div class="breakdown-bars">
+            <div class="bar-group">
+              <div class="bar-meta">
+                <span class="bar-label">BERT Semantic Compatibility</span>
+                <span class="bar-val" id="val-bert">0%</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill fill-primary" id="fill-bert" style="width: 0%;"></div></div>
+            </div>
+            
+            <div class="bar-group">
+              <div class="bar-meta">
+                <span class="bar-label">TF-IDF Keyword Relevance</span>
+                <span class="bar-val" id="val-tfidf">0%</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill fill-info" id="fill-tfidf" style="width: 0%;"></div></div>
+            </div>
+            
+            <div class="bar-group">
+              <div class="bar-meta">
+                <span class="bar-label">Direct Core Skill Match</span>
+                <span class="bar-val" id="val-direct">0%</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill fill-success" id="fill-direct" style="width: 0%;"></div></div>
+            </div>
+          </div>
+          
+          <div class="metrics-grid" style="margin-top: 32px;">
+            <div class="glass-card metric-card compact" style="border-left-color: #6C63FF;">
+              <p class="metric-label">BERT Semantics</p>
+              <p class="metric-value compact" id="metric-bert">0%</p>
+            </div>
+            <div class="glass-card metric-card compact" style="border-left-color: #4ECDC4;">
+              <p class="metric-label">TF-IDF Matches</p>
+              <p class="metric-value compact" id="metric-tfidf">0%</p>
+            </div>
+            <div class="glass-card metric-card compact" style="border-left-color: #FFB547;">
+              <p class="metric-label">Direct Skills</p>
+              <p class="metric-value compact" id="metric-direct">0%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="layout-grid-2" style="margin-top: 24px;">
+        <div class="glass-card">
+          <h2 class="section-title header-success">✅ Matched Keywords</h2>
+          <p class="section-subtitle" id="matched-kws-count">0 keywords found</p>
+          <div class="badge-container" id="matched-keywords-badges">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+        <div class="glass-card">
+          <h2 class="section-title header-danger">❌ Missing Keywords</h2>
+          <p class="section-subtitle" id="missing-kws-count">0 skills not found</p>
+          <div class="badge-container" id="missing-keywords-badges">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+      
+      <div class="glass-card" style="margin-top: 24px;" id="matched-skills-container">
+        <h2 class="section-title header-info">🎯 Matched Core Skills</h2>
+        <p class="section-subtitle">Skills present in both your resume and job description</p>
+        <div class="badge-container" id="matched-skills-badges">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: SKILL GAP ANALYSIS -->
+    <section id="screen-gap" class="screen-panel">
+      <div class="page-header">
+        <h1>Skill Gap Analysis</h1>
+        <p>See exactly which skills you have, which you're missing, and what to focus on.</p>
+      </div>
+      
+      <div class="metrics-grid">
+        <div class="glass-card metric-card" style="border-left-color: #6C63FF;">
+          <p class="metric-label">Match Percentage</p>
+          <p class="metric-value" id="gap-match-val">0%</p>
+        </div>
+        <div class="glass-card metric-card" id="gap-level-card" style="border-left-color: #4ECDC4;">
+          <p class="metric-label">Match Level</p>
+          <p class="metric-value" id="gap-level-val">—</p>
+        </div>
+        <div class="glass-card metric-card" style="border-left-color: #00D4AA;">
+          <p class="metric-label">Skills Matched</p>
+          <p class="metric-value" id="gap-matched-count">0</p>
+        </div>
+        <div class="glass-card metric-card" style="border-left-color: #FF6B6B;">
+          <p class="metric-label">Skills Missing</p>
+          <p class="metric-value" id="gap-missing-count">0</p>
+        </div>
+      </div>
+      
+      <div class="layout-grid-2" style="margin-top: 24px;">
+        <div class="glass-card flex-center">
+          <h2 class="section-title">📈 Skill Coverage</h2>
+          <!-- Hand-crafted SVG donut coverage chart -->
+          <div class="svg-ring-container">
+            <svg width="220" height="220" viewBox="0 0 220 220" class="radial-ring">
+              <!-- Background Ring (Missing) -->
+              <circle cx="110" cy="110" r="85" stroke="#FF6B6B" stroke-width="20" fill="transparent"></circle>
+              <!-- Foreground Ring (Matched) -->
+              <circle cx="110" cy="110" r="85" stroke="#00D4AA" stroke-width="20" fill="transparent" id="donut-matched-arc" stroke-dasharray="534" stroke-dashoffset="534" transform="rotate(-90 110 110)"></circle>
+            </svg>
+            <div class="ring-text">
+              <span class="ring-score" id="donut-ratio-display">0/0</span>
+              <span class="ring-label">Coverage</span>
+            </div>
+          </div>
+          <div class="legend-box">
+            <div class="legend-item"><span class="legend-color bg-success"></span> Matched</div>
+            <div class="legend-item"><span class="legend-color bg-danger"></span> Missing</div>
+          </div>
+        </div>
+        
+        <div class="glass-card">
+          <h2 class="section-title">🕸️ Skill Profile Matrix</h2>
+          <p class="section-subtitle" style="margin-bottom: 20px;">Proficiency comparison across core development categories</p>
+          
+          <!-- Category Progress Profiles -->
+          <div class="matrix-grid" id="radar-categories-container">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+      
+      <div class="layout-grid-2" style="margin-top: 24px;">
+        <div class="glass-card">
+          <h2 class="section-title header-danger">🚦 Missing Skills by Priority</h2>
+          <div class="priority-vertical-bars" id="priority-chart-container">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+        
+        <div class="glass-card">
+          <h2 class="section-title">📋 Skill Gap Details</h2>
+          <div class="gap-list" id="gap-details-list">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+      
+      <div class="glass-card" style="margin-top: 24px;">
+        <h2 class="section-title header-success">✅ Your Core Strengths</h2>
+        <p class="section-subtitle" id="strengths-title">0 skills detected in your profile</p>
+        <div class="badge-container" id="strengths-badges">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 5: LEARNING RECOMMENDATIONS -->
+    <section id="screen-recs" class="screen-panel">
+      <div class="page-header">
+        <h1>Learning Recommendations</h1>
+        <p>Curated learning tutorials and certification courses to bridge your skill gaps.</p>
+      </div>
+      
+      <div class="glass-card filter-card">
+        <h3 class="filter-title">🔍 Filter Recommendations</h3>
+        <div class="filter-row">
+          <div class="toggle-group">
+            <label class="toggle-switch">
+              <input type="checkbox" id="filter-free" onchange="applyFilters()">
+              <span class="slider"></span>
+            </label>
+            <span class="toggle-label-text">🆓 Free courses only</span>
+          </div>
+          
+          <div class="form-group compact">
+            <select id="filter-priority" class="form-control" onchange="applyFilters()">
+              <option value="All">All Priorities</option>
+              <option value="High">High Priority</option>
+              <option value="Medium">Medium Priority</option>
+              <option value="Low">Low Priority</option>
+            </select>
+          </div>
+          
+          <div class="form-group compact">
+            <select id="filter-platform" class="form-control" onchange="applyFilters()">
+              <option value="All">All Platforms</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="metrics-grid" style="margin-top: 24px;">
+        <div class="glass-card metric-card compact" style="border-left-color: #6C63FF;">
+          <p class="metric-label">Total Gaps Recommendations</p>
+          <p class="metric-value compact" id="rec-total-count">0</p>
+        </div>
+        <div class="glass-card metric-card compact" style="border-left-color: #00D4AA;">
+          <p class="metric-label">Free Courses</p>
+          <p class="metric-value compact" id="rec-free-count">0</p>
+        </div>
+        <div class="glass-card metric-card compact" style="border-left-color: #4ECDC4;">
+          <p class="metric-label">Skills Addressed</p>
+          <p class="metric-value compact" id="rec-skills-count">0</p>
+        </div>
+        <div class="glass-card metric-card compact" style="border-left-color: #FFB547;">
+          <p class="metric-label">Currently Showing</p>
+          <p class="metric-value compact" id="rec-showing-count">0</p>
+        </div>
+      </div>
+      
+      <div class="recommendations-container" id="recommendations-viewport">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- SCREEN 6: CAREER PREDICTION -->
+    <section id="screen-career" class="screen-panel">
+      <div class="page-header">
+        <h1>Career Path Prediction</h1>
+        <p>AI-powered recommendation models mapping ideal career trajectories based on your capabilities.</p>
+      </div>
+      
+      <div class="layout-grid-2">
+        <div class="glass-card">
+          <h2 class="section-title">📊 Career Match Confidence</h2>
+          <p class="section-subtitle">Top predicted professional pathways</p>
+          <div class="career-prediction-list" id="career-paths-chart-container">
+            <!-- Custom dynamic progress-based bars populated by JS -->
+          </div>
+        </div>
+        
+        <div class="glass-card flex-center glow-card" style="border-left: 4px solid #6C63FF;">
+          <h2 class="section-title header-primary">🏆 Your Absolute Top Match</h2>
+          <div class="top-match-container">
+            <span class="match-trophy">🥇</span>
+            <h3 id="top-career-role">Software Engineer</h3>
+            <p class="top-match-score" id="top-career-score">0%</p>
+            <p class="top-match-label">Match Score Compatibility</p>
+          </div>
+          <div class="explanation-box" id="top-career-explanation" style="margin-top: 16px;">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+      
+      <div class="glass-card" style="margin-top: 24px;">
+        <h2 class="section-title">🗺️ Detailed Career Match Breakdown</h2>
+        <div class="career-cards-grid" id="all-career-cards">
+          <!-- Dynamic Glassmorphic Career cards populated by JS -->
+        </div>
+      </div>
+      
+      <div class="glass-card" style="margin-top: 24px;">
+        <h2 class="section-title">🔍 Career Gap Drill-Down</h2>
+        <p class="section-subtitle">Select any career path to dissect your specific capability gap</p>
+        
+        <div class="form-group compact" style="max-width: 320px; margin: 16px 0;">
+          <select id="drilldown-role-select" class="form-control" onchange="renderDrilldown()">
+            <!-- Populated by JS -->
+          </select>
+        </div>
+        
+        <div class="layout-grid-2" style="margin-top: 16px;">
+          <div class="glass-card" style="border-left: 3px solid #00D4AA; background: rgba(0,212,170,0.01);">
+            <h4 style="color: #00D4AA; margin-bottom: 12px; font-weight: 600;" id="drilldown-have-title">✅ Skills You Possess (0)</h4>
+            <div class="bullets-list" id="drilldown-have-list">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+          
+          <div class="glass-card" style="border-left: 3px solid #FF6B6B; background: rgba(255,107,107,0.01);">
+            <h4 style="color: #FF6B6B; margin-bottom: 12px; font-weight: 600;" id="drilldown-learn-title">❌ Skills to Learn (0)</h4>
+            <div class="bullets-list" id="drilldown-learn-list">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 7: AI ASSISTANT -->
+    <section id="screen-chat" class="screen-panel">
+      <div class="page-header">
+        <h1>AI Career Assistant</h1>
+        <p>Your on-demand visual developer counselor, powered by Gemini.</p>
+      </div>
+      
+      <div class="chat-wrapper">
+        <div class="chat-sidebar">
+          <div class="glass-card chat-features">
+            <h3>⚡ Conversation Scope</h3>
+            <ul>
+              <li><span class="bullet-dot"></span> Career Advice</li>
+              <li><span class="bullet-dot"></span> CV Polish Tips</li>
+              <li><span class="bullet-dot"></span> Interview Prep Questions</li>
+              <li><span class="bullet-dot"></span> Technical Concepts Explained</li>
+            </ul>
+          </div>
+          <button class="btn btn-secondary" onclick="clearChat()" style="margin-top: 16px; width: 100%;">🧹 Clear Chat History</button>
+        </div>
+        
+        <div class="chat-main glass-card">
+          <div class="chat-history" id="chat-history-viewport">
+            <div class="chat-msg assistant">
+              <div class="msg-avatar">🤖</div>
+              <div class="msg-bubble">Hello! I am your SkillSync AI Counselor. Ask me anything about your analysis results, skill acquisition advice, or career recommendations.</div>
+            </div>
+          </div>
+          
+          <div class="chat-input-bar">
+            <input type="text" id="chat-input-field" placeholder="Ask your AI Career Coach a question..." onkeydown="handleChatKey(event)">
+            <button class="btn btn-primary" onclick="sendChatMessage()">Send 📤</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modern Vanilla JS Core App Logic -->
+  <script src="js/app.js"></script>
+</body>
+</html>
