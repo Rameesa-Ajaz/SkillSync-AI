@@ -22,7 +22,6 @@ env/
 *.ipynb
 
 # Data / Models (large files)
-data/raw/*.csv
 data/processed/
 data/models/*.pkl
 data/models/*.pt
