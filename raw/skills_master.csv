@@ -1,0 +1,91 @@
+skill,category,priority
+python,Programming,High
+java,Programming,High
+javascript,Programming,High
+typescript,Programming,High
+c++,Programming,High
+c#,Programming,High
+r,Programming,Medium
+go,Programming,Medium
+rust,Programming,Medium
+kotlin,Programming,Medium
+swift,Programming,Medium
+react,Frontend,High
+angular,Frontend,Medium
+vue,Frontend,Medium
+html,Frontend,High
+css,Frontend,High
+node.js,Backend,High
+django,Backend,Medium
+flask,Backend,Medium
+fastapi,Backend,Medium
+spring boot,Backend,Medium
+express,Backend,Medium
+rest api,Backend,High
+graphql,Backend,Medium
+tensorflow,ML/AI,High
+pytorch,ML/AI,High
+keras,ML/AI,Medium
+scikit-learn,ML/AI,High
+machine learning,ML/AI,High
+deep learning,ML/AI,High
+natural language processing,ML/AI,High
+nlp,ML/AI,High
+computer vision,ML/AI,Medium
+data science,Data,High
+data analysis,Data,High
+data visualization,Data,High
+pandas,Data,High
+numpy,Data,High
+matplotlib,Data,Medium
+seaborn,Data,Medium
+big data,Data,Medium
+spark,Data,Medium
+hadoop,Data,Low
+sql,Database,High
+mysql,Database,High
+postgresql,Database,High
+mongodb,Database,Medium
+redis,Database,Medium
+elasticsearch,Database,Medium
+sqlite,Database,Low
+oracle,Database,Medium
+docker,DevOps,High
+kubernetes,DevOps,High
+aws,Cloud,High
+azure,Cloud,High
+gcp,Cloud,Medium
+terraform,DevOps,Medium
+ansible,DevOps,Medium
+jenkins,DevOps,Medium
+ci/cd,DevOps,High
+git,Tools,High
+github,Tools,High
+linux,OS,High
+bash,OS,Medium
+power bi,BI,Medium
+tableau,BI,Medium
+excel,Office,Medium
+jira,Tools,Medium
+figma,Design,Medium
+ui/ux,Design,Medium
+communication,Soft Skills,High
+leadership,Soft Skills,Medium
+teamwork,Soft Skills,Medium
+problem solving,Soft Skills,High
+project management,Soft Skills,Medium
+agile,Methodology,High
+scrum,Methodology,Medium
+devops,Methodology,High
+statistics,Mathematics,High
+a/b testing,Analytics,Medium
+microservices,Architecture,Medium
+blockchain,Emerging,Low
+cybersecurity,Security,Medium
+network,Infrastructure,Medium
+cloud computing,Cloud,High
+mlops,ML/AI,Medium
+transformers,ML/AI,High
+bert,ML/AI,High
+spacy,ML/AI,Medium
+nltk,ML/AI,Medium
